@@ -1,0 +1,238 @@
+{% extends 'Adminpage.html.twig' %}
+
+{% block title %}Edit Utilisateur
+{% endblock %}
+
+{% block body %}
+	<div class="main-panel">
+		<div class="content-wrapper">
+			<div class="page-header">
+				<h1 class="page-title">
+					Modifier Utilisateur
+
+				</h1>
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item">
+							<a href="#">Gestion des Comptes</a>
+						</li>
+					</ol>
+				</nav>
+			</div>
+			<div class="large-group">
+
+				<div class="small-group">
+					{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+
+
+					{{ form_label(form.nom,"Nom ") }}
+					{{ form_widget(form.nom,{'attr':{'class':'form-control'}}) }}
+					{% if form_errors(form.nom) %}
+
+						<div class="alert alert-danger" style=" color : red">
+							{{ form_errors(form.nom)|join }}
+						</div>
+
+					{% endif %}
+
+				</div>
+
+
+				<div class="small-group">
+
+
+					{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+					{{ form_label(form.prenom,"Prénom") }}
+					{{ form_widget(form.prenom,{'attr':{'class':'form-control '}}) }}
+					{% if form_errors(form.prenom) %}
+
+						<div class="alert alert-danger" style=" color : red">
+							{{ form_errors(form.prenom) }}
+						</div>
+					{% endif %}
+
+
+				</div>
+				<div class="small-group">
+
+
+					{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+
+					{{ form_widget(form.password,{'attr':{'class':'form-control ','hidden': 'hidden',}}) }}
+					{% if form_errors(form.password) %}
+
+						<div class="alert alert-danger" style=" color : red">
+							{{ form_errors(form.password) }}
+						</div>
+					{% endif %}
+
+
+				</div>
+				<div class="small-group">
+
+
+					{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+
+					{{ form_widget(form.urlImage,{'attr':{'class':'form-control ','hidden': 'hidden',}}) }}
+					{% if form_errors(form.urlImage) %}
+
+						<div class="alert alert-danger" style=" color : red">
+							{{ form_errors(form.urlImage) }}
+						</div>
+					{% endif %}
+
+
+				</div>
+
+				<div class="small-group">
+
+
+					{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+					{{ form_label(form.email,"Email") }}
+					{{ form_widget(form.email,{'attr':{'class':'form-control'}}) }}
+					{% if form_errors(form.email) %}
+
+						<div class="alert alert-danger" style=" color : red">
+							{{ form_errors(form.email) }}
+						</div>
+					{% endif %}
+
+				</div>
+
+				<div class="small-group">
+
+
+					{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+					{{ form_label(form.numeroTel,"Numéro de Telephone ") }}
+					{{ form_widget(form.numeroTel,{'attr':{'class':'form-control'}}) }}
+					{% if form_errors(form.numeroTel) %}
+
+						<div class="alert alert-danger" style=" color : red">
+							{{ form_errors(form.numeroTel) }}
+						</div>
+					{% endif %}
+
+				</div>
+
+
+				<div class="small-group">
+
+
+					{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+					{{ form_label(form.address,"Adresse") }}
+					{{ form_widget(form.address,{'attr':{'class':'form-control'}}) }}
+					{% if form_errors(form.address) %}
+
+						<div class="alert alert-danger" style=" color : red">
+							{{ form_errors(form.address) }}
+						</div>
+					{% endif %}
+
+
+				</div>
+
+				<div class="small-group">
+
+					{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+					{{ form_label(form.roles,"Role") }}
+					{{ form_widget(form.roles,{'attr':{'class':'form-control'}}) }}
+
+					{% if form_errors(form.roles) %}
+
+						<div class="alert alert-danger" style=" color : red">
+							{{ form_errors(form.roles) }}
+						</div>
+					{% endif %}
+
+
+				</div>
+				<div class="small-group">
+
+					{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+					{{ form_label(form.date,"Date de création") }}
+					{{ form_widget(form.date,{'attr':{'class':'form-control'}}) }}
+					{% if form_errors(form.date) %}
+
+						<div class="alert alert-danger" style=" color : red">
+							{{ form_errors(form.date) }}
+						</div>
+					{% endif %}
+
+				</div>
+				<div class="small-group">
+
+					{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+					{{ form_label(form.refSpecialite,"Spécialite") }}
+					{{ form_widget(form.refSpecialite,{'attr':{'class':'form-control'}}) }}
+					{% if form_errors(form.refSpecialite) %}
+
+						<div class="alert alert-danger" style=" color : red">
+							{{ form_errors(form.refSpecialite) }}
+
+						</div>
+					{% endif %}
+
+				</div>
+				<div class="small-group">
+
+					{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+					{{ form_label(form.isdelete,"Status") }}
+					{{ form_widget(form.isdelete,{'attr':{'class':'form-control'}}) }}
+
+					{% if form_errors(form.isdelete) %}
+
+						<div class="alert alert-danger" style=" color : red">
+							{{ form_errors(form.isdelete) }}
+
+						</div>
+					{% endif %}
+
+				</div>
+				<div class="small-group">
+
+					{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+					{{ form_label(form.gender,"Genre") }}
+					{{ form_widget(form.gender,{'attr':{'class':'form-control'}}) }}
+					{% if form_errors(form.gender) %}
+
+						<div class="alert alert-danger" style=" color : red">
+							{{ form_errors(form.gender) }}
+
+						</div>
+					{% endif %}
+
+				</div>
+				<div class="small-group">
+
+					{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+					{{ form_label(form.agreeTerms,"agreeTerms") }}
+					{{ form_widget(form.agreeTerms,{'attr':{'class':'form-control'}}) }}
+					{% if form_errors(form.agreeTerms) %}
+
+						<div class="alert alert-danger" style=" color : red">
+							{{ form_errors(form.agreeTerms) }}
+
+						</div>
+					{% endif %}
+
+				</div>
+
+				<button class="btn">
+					{{ form_widget(form.save)}}
+					{{ form_widget(form._token) }}
+
+					{{ form_end(form, {render_rest: false}) }}
+
+				</button>
+				<div class="small-group"></div>
+
+			</div>
+
+
+			<a href="{{ path('app_gerer_utilisateur_Liste') }}">
+				<i class="mdi mdi-keyboard-return"></i>
+			</a>
+
+		</div>
+	</div>
+{% endblock %}

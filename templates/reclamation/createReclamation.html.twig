@@ -1,0 +1,89 @@
+{% extends 'frontUsers.html.twig' %}
+{# {% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('back/css/reclamation.css') }}">
+{% endblock %} #}
+
+{% block body %}
+
+<main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs" data-aos="fade-in">
+      <div class="container">
+        <h2>Votre Reclammation</h2>
+        <p>Est dolorum ut non facere possimus quibusdam eligendi voluptatem. Quia id aut similique quia voluptas sit quaerat debitis. Rerum omnis ipsam aperiam consequatur laboriosam nemo harum praesentium. </p>
+      </div>
+    </div><!-- End Breadcrumbs -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div data-aos="fade-up">
+        <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/place/ESPRIT+Ecole+Sup%C3%A9rieure+Priv%C3%A9e+d'Ing%C3%A9nierie+et+de+Technologies/@36.8991051,10.113056,13z/data=!4m10!1m2!2m1!1stunis+esprit+!3m6!1s0x12e2cb75abbb1733:0x557a99cdf6c13b7b!8m2!3d36.8991051!4d10.1892737!15sCgx0dW5pcyBlc3ByaXQiA4gBAZIBD2dyYWR1YXRlX3NjaG9vbOABAA!16s%2Fg%2F11dybgg6rl?entry=ttu" frameborder="0" allowfullscreen></iframe>
+      </div>
+
+      <div class="container" data-aos="fade-up">
+
+        <div class="row mt-5">
+
+          
+
+          
+          
+            <div class="col-lg-8 mt-5 mt-lg-0">
+
+            
+               {{ form_start(form,{ 'attr': {'novalidate': 'validate'} }) }}
+
+                 <div class="row">
+                <div class="col-md-6 form-group" style="display: none">
+                 {{ form_widget(form.dateReclamation, {'attr': {'class': 'form-control'}}) }} #}
+                     {{ form_errors(form.dateReclamation) }}
+                </div>
+                
+              </div>
+              
+              <div class="form-group mt-3">
+                {{ form_widget(form.description, {'attr': {'class': 'form-control','novalidate': 'validate'}}) }}
+                    {{ form_errors(form.description) }}
+              </div>
+               <div class="form-group" style="display: none">
+                    {{ form_label(form.etat) }}
+                    {{ form_widget(form.etat, {'attr': {'class': 'form-control','novalidate': 'validate'}}) }}
+                    {{ form_errors(form.etat) }}
+                </div>
+              
+              <div class="text-center">
+            <button type="submit" class="btn btn-danger">Envoyer Message</button>  
+                        {{ form_end(form) }}
+
+              </div>
+            </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+</main><!-- End #main -->
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+ 

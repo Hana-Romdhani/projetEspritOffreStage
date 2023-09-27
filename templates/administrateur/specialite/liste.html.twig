@@ -1,0 +1,102 @@
+{% extends 'AdminPage.html.twig' %}
+
+
+{% block title %}Spécialite
+{% endblock %}
+
+
+{% block body %}
+
+	<div class="main-panel">
+		<div class="content-wrapper">
+			{% for flashMessage in app.session.flashbag.get('success') %}
+				<div class="alert alert-success">{{ flashMessage }}</div>
+			{% endfor %}
+			<div class="page-header">
+				<h3 class="page-title">
+					Liste des Spécialite
+				</h3>
+
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item">
+							<a href="{{ path('app_specialite') }}">Gestion Spécialite</a>
+						</li>
+					</ol>
+				</nav>
+			</div>
+
+			<div class="row">
+				<div class="col-sm">
+					<div class="card">
+						<div class="card-body">
+							<a href="{{ path('app_gerer_specialite_ajouter') }}" class="btn btn-primary mb-2">Ajouter</a>
+							<form action="{{ path('spe_search') }}" method="get">
+								<div class="input-group mb-3">
+									<input type="text" class="form-control" placeholder="Recherche par domaine" name="specialite">
+									<button class="btn btn-outline-secondary" type="submit">Rechercher</button>
+								</div>
+							</form>
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr>
+
+											<th>
+												Domaines
+											</th>
+
+											<th>Actions</th>
+
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											{% for s in specialite %}
+												<tr>
+
+													<td>{{ s.domaine }}</td>
+
+
+													<td>
+														<a href="{{ path('app_gerer_spe_modifier', {'idSpecialite': s.idSpecialite}) }}" class="badge badge-success">Modifier</a>
+														<a href="{{ path('app_gerer_specialite_sup', {'idSpecialite': s.idSpecialite}) }}" class="badge badge-warning" onclick="return confirm('Êtes-vous sûr de vouloir supprimer définitivement cet élément ?')">Supprimer</a>
+													</td>
+
+
+												</tr>
+											{% else %}
+												<tr>
+													<td colspan="20">no records found</td>
+												</tr>
+											{% endfor %}
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+
+		</div>
+
+		<script>
+			setTimeout(function () {
+var successMessages = document.querySelectorAll('.alert-success');
+for (var i = 0; i < successMessages.length; i++) {
+successMessages[i].classList.add('hide');
+}
+}, 5000);
+		</script>
+
+
+		<style>
+			.hide {
+				display: none;
+			}
+		</style>
+
+	{% endblock %}

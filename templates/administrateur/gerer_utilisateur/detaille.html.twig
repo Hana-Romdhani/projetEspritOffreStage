@@ -1,0 +1,86 @@
+{% extends 'Adminpage.html.twig' %}
+
+{% block title %}Utilisateur
+{% endblock %}
+
+{% block body %}
+	<div class="main-panel">
+		<div class="content-wrapper">
+			<div class="page-header">
+				<h1 class="page-title">
+					Ces Detaille
+				</h1>
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item">
+							<a href="#">Gestion des Comptes</a>
+						</li>
+					</ol>
+				</nav>
+			</div>
+			
+
+			<table class="table">
+				<tbody>
+					<tr>
+						<th>Image</th>
+						<td class="py-1">
+							<img src="{{ asset('uploads/utilisateur/' ~ utilisateur.urlImage) }}" alt="User Image" style="width: 50px; height: 50px;"/>
+						</td>
+					</tr>
+					<tr>
+						<th>Nom</th>
+						<td>{{ utilisateur.nom }}</td>
+					</tr>
+					<tr>
+						<th>Prenom</th>
+						<td>{{ utilisateur.prenom }}</td>
+					</tr>
+					<tr>
+						<th>Email</th>
+						<td>{{ utilisateur.email }}</td>
+					</tr>
+					
+					<tr>
+						<th>Numero de telephone </th>
+						<td>{{ utilisateur.numeroTel }}</td>
+					</tr>
+					<tr>
+						<th>Address</th>
+						<td>{{ utilisateur.address }}</td>
+					</tr>
+					<tr>
+						<th>Role</th>
+						<td>{{ utilisateur.role }}</td>
+					</tr>
+
+					<tr>
+						<th>Date de création
+						</th>
+						<td>{{ utilisateur.date ? utilisateur.date|date('Y-m-d H:i:s') : '' }}</td>
+					</tr>
+					<tr>
+						<th>Status
+						</th>
+						<td>{{ utilisateur.isdelete ? 'Active' : 'Désactiver' }}</td>
+					</tr>
+					<tr>
+						<th>Date de derniere tentative
+						</th>
+						<td>{{ utilisateur.datederniereconnx ? utilisateur.datederniereconnx|date('Y-m-d H:i:s') : '' }}</td>
+					</tr>
+
+					<tr>
+						<th>Gender</th>
+						<td>{{ utilisateur.gender }}</td>
+					</tr>
+
+				</tbody>
+			</table>
+
+			<a href="{{ path('app_gerer_utilisateur_Liste') }}" ><i class="mdi mdi-keyboard-return"></i>
+			</a>
+
+			<a href="{{ path('app_gerer_utilisateur_modifier', {'idUtilisateur': utilisateur.idUtilisateur}) }}"class="badge badge-success">Modifier</a>
+
+		{% endblock %}

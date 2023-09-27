@@ -1,0 +1,37 @@
+{% extends 'Adminpage.html.twig' %}
+
+{% block body %}
+    <h1>Supprimer un élément</h1>
+
+    <p>Êtes-vous sûr de vouloir supprimer cet élément ?</p>
+
+    <form method="post" action="{{ path('app_gerer_utilisateur_sup', {'idUtilisateur': utilisateur.idUtilisateur}) }}" onsubmit="return confirmDelete(event)">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete_element' ~ utilisateur.idUtilisateur) }}">
+        <button type="submit" class="btn btn-danger">Supprimer</button>
+    </form>
+
+    <script>
+        function confirmDelete(event) {
+            event.preventDefault();
+            const modal = document.createElement('div');
+            modal.innerHTML = `
+                <div class="modal">
+                    <p>Êtes-vous sûr de vouloir supprimer cet élément ?</p>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Annuler</button>
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                </div>
+                <div class="modal-backdrop"></div>
+            `;
+            document.body.appendChild(modal);
+            document.body.classList.add('modal-open');
+            modal.querySelector('.btn-secondary').addEventListener('click', closeModal);
+        }
+
+        function closeModal() {
+            const modal = document.querySelector('.modal');
+            modal.parentNode.removeChild(modal);
+            document.body.classList.remove('modal-open');
+        }
+    </script>
+{% endblock %}

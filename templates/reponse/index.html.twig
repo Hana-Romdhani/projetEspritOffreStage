@@ -1,0 +1,68 @@
+{% extends 'Adminpage.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('back/css/reclamation.css') }}">
+{% endblock %}
+
+
+{% block body %}
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-6 col-md-8 col-sm-10">
+                <div class="card shadow-lg">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="card-header">
+
+                        <h5 class="card-title mb-0">Edit Reclamation Num #{{ reclamation.id }}</h5>
+                    </div>
+                    <div class="card-body ">
+                        <div class="reclamation-form">
+
+
+                            {{ form_start(form,{ 'attr': {'novalidate': 'validate'} }) }}
+                            <div class="form-group">
+                                {{ form_label(form.user) }}
+                                {{ form_widget(form.user, {'attr': {'class': 'form-control','disabled': true}}) }}
+                                {{ form_errors(form.user) }}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_label(form.dateReclamation) }}
+                                {{ form_widget(form.dateReclamation, {'attr': {'class': 'form-control','disabled': true}}) }}
+                                {{ form_errors(form.dateReclamation) }}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_label(form.description) }}
+                                {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(form.description) }}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_label(form.etat) }}
+                                {{ form_widget(form.etat, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(form.etat) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.rep) }}
+                                {{ form_widget(form.rep, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(form.rep) }}
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                            <a href="{{ path('reclamations') }}" class="btn btn-secondary">Cancel</a>
+                            {{ form_end(form) }}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

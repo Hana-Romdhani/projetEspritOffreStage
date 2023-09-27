@@ -1,0 +1,85 @@
+{% extends 'Adminpage.html.twig' %}
+{% block stylesheets %}
+    <style>
+        .title {
+            font-size: 30px;
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #0f1015;
+        }
+
+        .card-text {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .card-header {
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            background-color: #4a3179;
+        }
+
+        .card-body {
+            padding: 1rem;
+        }
+
+        .card-footer {
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            background-color: #f8f9fa;
+        }
+
+        .card-text {
+            color: black;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    <div class="container">
+
+        <div class="row justify-content-center mt-5 align-items-center" style="min-height: 100vh">
+            <div class="col-lg-6 col-md-8 col-sm-10">
+                <div class="card shadow-lg">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Reclamation Num #{{ reclamation.id }}
+                            - {{ reclamation.dateReclamation|date('d/m/Y') }}</h5>
+                    </div>
+                    <div class="card-body bg-light">
+                        <div class="reclamation-form">
+                            <p class="card-text">Email : {{ reclamation.user }}</p>
+                            <br>
+                            <p class="card-text">Description: {{ reclamation.description }}</p>
+                            <br>
+                            <p class="card-text">Etat : {{ reclamation.etat }}</p>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="card-footer">
+                            <a href="{{ path('reclamations') }}" class="btn btn-secondary">Return</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

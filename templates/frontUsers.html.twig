@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<meta charset="utf-8">
+		<meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+		<title>
+			{% block title %}
+               OpportunityPulse
+			{% endblock %}
+		</title>
+		<meta content="" name="description">
+		<meta
+		content="" name="keywords">
+
+		<!-- Favicons -->
+		<link href="{{ asset('Mentor/assets/img/esprit.png') }}" rel="icon">
+		<link href="{{ asset('Mentor/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+		{% block stylesheets %}
+			<!-- Google Fonts -->
+			<link
+			href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+			<!-- Vendor CSS Files -->
+			<link href="{{ asset('Mentor/assets/vendor/animate.css/animate.min.css') }}" rel="stylesheet">
+			<link href="{{ asset('Mentor/assets/vendor/aos/aos.css" rel="stylesheet') }}">
+			<link href="{{ asset('Mentor/assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+			<link href="{{ asset('Mentor/assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+			<link href="{{ asset('Mentor/assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+			<link href="{{ asset('Mentor/assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
+			<link
+			href="{{ asset('Mentor/assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+
+			<!-- Template Main CSS File -->
+			<link href="{{ asset('Mentor/assets/css/style.css') }}" rel="stylesheet">
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+		{% endblock %}
+
+
+	</head>
+	<body>
+		<div id="preloader"></div>
+
+		<!-- ======= Header ======= -->
+		<header id="header" class="fixed-top">
+			<div class="container d-flex align-items-center">
+               
+				<h1 class="logo me-auto">
+					<a href="index.html">ESPRIT</a>
+				</h1>
+				<!-- Uncomment below if you prefer to use an image logo -->
+				<!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+				<nav id="navbar" class="navbar order-last order-lg-0">
+					<ul>
+						<li>
+							<a class="active" href="#">Accueil</a>
+						</li>
+						{% if app.user %}
+                             <li>
+			
+					        <a href="{{path('offres_list_front')}}" class="nav-link">Offres</a>
+									</li>
+                                  <li class="nav-item dropdown">
+										<a href="#" class="nav-link dropdown-toggle" id="reclamationDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reclamation</a>
+										<div class="dropdown-menu" aria-labelledby="reclamationDropdown">
+											<a href="{{path('addReclamation')}}" class="dropdown-item">Add Reclamation</a>
+											<a href="{{path('userReclamations')}}" class="dropdown-item">Check Reclamations</a>
+											{# /addReclamation   /userReclamations #}
+										</div>
+										
+									</li>
+                                 <li class="nav-item dropdown">
+										<a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
+											<div class="navbar-profile">
+												<p class="p-3 mb-0 text-center">
+													{% if app.user is not null %}
+														Bonjour ! :
+														{{ app.user.nom }}
+														{{ app.user.prenom }}
+													{% else %}
+														Vous n'êtes pas connecté. Veuillez vous connecter pour accéder à cette page.
+														<a href="{{ path('app_login') }}" class="nav-link">retourner à la page de connexion</a>
+													{% endif %}
+												</p>
+												<p class="mb-0 d-none d-sm-block navbar-profile-name"></p>
+												<i class="mdi mdi-menu-down d-none d-sm-block"></i>
+											</div>
+											<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
+												<a href="{{path('app_user_profile')}}" class="dropdown-item preview-item">
+													<div class="preview-item-content">
+														<p class="preview-subject ellipsis mb-1 text-small">Consulter votre compte</p>
+													</div>
+												</a>
+												<div class="dropdown-divider"></div>
+												<a href="{{path('edit_password', {'id': app.user.idUtilisateur})}}" class="dropdown-item preview-item">
+													
+													<div class="preview-item-content">
+														<p class="preview-subject ellipsis mb-1 text-small">Modifier mot de passe</p>
+													</div>
+												</a>
+												<div class="dropdown-divider"></div>
+												<a class="dropdown-item preview-item" href="{{ path('app_logout') }}">
+													<div class="preview-item-content">
+														<p class="preview-subject mb-1">Déconnecter</p>
+													</div>
+												</a>
+											</div>
+										</a>
+
+									</li>
+                        {% else %}
+                           <li>
+							<a href="{{ path('app_login') }}">Connecter</a>
+						   </li>
+						   
+                          {% endif %}
+						
+						<i class="bi bi-list mobile-nav-toggle"></i>
+					</nav>
+					<!-- .navbar -->
+
+
+				</div>
+			</header>
+ {% block body %}
+{% for flashMessage in app.session.flashbag.get('success') %}
+						<div class="alert alert-success">{{ flashMessage }}</div>
+					{% endfor %}
+
+            
+
+			<!-- End Header -->
+
+			<!-- ======= Hero Section ======= -->
+			<section id="hero" class="d-flex justify-content-center align-items-center">
+				<div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">
+					<h1>
+						Votre carrière<br>, notre priorité :</h1>
+					<h2>Bienvenue chez Esprit, découvrez l'emploi de vos rêves avec nous .
+					</h2>
+
+					<a href="courses.html" class="btn-get-started">Découvrir</a>
+				</div>
+			</section>
+			<!-- End Hero -->
+
+			<main
+				id="main">
+
+				<!-- ======= About Section ======= -->
+				<section id="about" class="about">
+					<div class="container" data-aos="fade-up">
+
+						<div class="row">
+							<div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
+								<img src="assets/img/about.jpg" class="img-fluid" alt="">
+							</div>
+							<div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
+								<h3>Prêt à explorer des horizons professionnels inconnus !
+								</h3>
+								<p class="fst-italic">
+									Dans un monde en constante évolution, la recherche d'opportunités professionnelles et de stages de qualité est essentielle pour votre avenir. Notre plateforme est conçue pour vous guider vers des chemins prometteurs. Nous comprenons que chaque candidat est unique, c'est pourquoi nous mettons à votre disposition une variété d'offres d'emploi et de stages, adaptées à vos compétences et aspirations. Avec nos outils, nos conseils d'experts et notre réseau de partenaires, vous serez mieux préparé que jamais à atteindre vos objectifs professionnels. Rejoignez-nous aujourd'hui et ouvrez la porte à un avenir professionnel rempli d'opportunités passionnantes et de succès durables.
+								</p>
+
+
+							</div>
+						</div>
+
+					</div>
+				</section>
+
+			</main>
+			<!-- End #main -->
+		
+          </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+			<!-- ======= Footer ======= -->
+			<footer id="footer">
+
+				<div class="footer-top">
+					<div class="container">
+						<div class="row">
+
+							<div class="col-lg-3 col-md-6 footer-contact">
+								<h3>Esprit</h3>
+								<p>
+									A108 Adam Street
+									<br>
+									New York, NY 535022<br>
+									United States
+									<br><br>
+									<strong>Phone:</strong>
+									+1 5589 55488 55<br>
+									<strong>Email:</strong>
+									info@example.com<br>
+								</p>
+							</div>
+
+							<div class="col-lg-4 col-md-6 footer-newsletter">
+								<h4>Join Our Newsletter</h4>
+								<p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+								<form action="" method="post">
+									<input type="email" name="email"><input type="submit" value="Subscribe">
+								</form>
+								<div class="container d-md-flex py-4">
+									<div class="social-links text-center text-md-right pt-3 pt-md-0">
+										<a href="" class="twitter">
+											<i class="bx bxl-twitter"></i>
+										</a>
+										<a href="#" class="facebook">
+											<i class="bx bxl-facebook"></i>
+										</a>
+										<a href="#" class="instagram">
+											<i class="bx bxl-instagram"></i>
+										</a>
+										<a href="#" class="google-plus">
+											<i class="bx bxl-skype"></i>
+										</a>
+										<a href="#" class="linkedin">
+											<i class="bx bxl-linkedin"></i>
+										</a>
+									</div>
+								</div>
+
+
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+			</footer>
+			<!-- End Footer -->
+
+			{% block js %}
+			<a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+				<i class="bi bi-arrow-up-short"></i>
+			</a>
+				<!-- Vendor JS Files -->
+				<script src="asset('Mentor/assets/vendor/purecounter/purecounter_vanilla.js') }}"></script>
+				<script src="asset('Mentor/assets/vendor/aos/aos.js') }}"></script>
+				<script src="asset('Mentor/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+				<script src="asset('Mentor/assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
+				<script src="asset('Mentor/assets/vendor/php-email-form/validate.js') }}"></script>
+
+				<!-- Template Main JS File -->
+				<script src="asset('Mentor/assets/js/main.js') }}"></script>
+	<script>
+				let preloader = document.querySelector('#preloader');
+if (preloader) {
+window.addEventListener('load', () => {
+preloader.remove();
+});
+}
+			</script>
+
+<script src="{{ asset('frontOffice/js/jquery-3.3.1.min.js') }}"></script><script src="{{ asset('frontOffice/js/jquery-ui.js') }}"></script><script src="{{ asset('frontOffice/js/popper.min.js') }}"></script><script src="{{ asset('frontOffice/js/bootstrap.min.js') }}"></script><script src="{{ asset('frontOffice/js/owl.carousel.min.js') }}"></script><script src="{{ asset('frontOffice/js/jquery.countdown.min.js') }}"></script><script src="{{ asset('frontOffice/js/jquery.easing.1.3.js') }}"></script><script src="{{ asset('frontOffice/js/aos.js') }}"></script><script src="{{ asset('frontOffice/js/jquery.fancybox.min.js') }}"></script><script src="{{ asset('frontOffice/js/jquery.sticky.js') }}"></script><script src="{{ asset('frontOffice/js/isotope.pkgd.min.js') }}"></script><script src="{{ asset('frontOffice/js/main.js') }}"></script><script>
+setTimeout(function () {
+var successMessages = document.querySelectorAll('.alert-success');
+for (var i = 0; i < successMessages.length; i++) {
+successMessages[i].classList.add('hide');
+}
+}, 5000);</script><script>
+var dropdownButton = document.querySelector('#profileDropdown');
+dropdownButton.addEventListener('click', function () {
+var dropdownMenu = document.querySelector('.dropdown-menu');
+dropdownMenu.classList.toggle('show');
+});</script>
+
+
+<script>
+  const dropdown = document.querySelector('.dropdown')
+  const dropdownMenu = document.querySelector('.dropdown-menu')
+
+  dropdown.addEventListener('mouseenter', function() {
+    dropdownMenu.style.display = 'block'
+  })
+
+  dropdown.addEventListener('mouseleave', function() {
+    dropdownMenu.style.display = 'none'
+  })
+</script>
+
+		
+			{% endblock %}
+		
+		</body>
+	</body>
+</html>

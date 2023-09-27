@@ -1,0 +1,64 @@
+{% extends 'Adminpage.html.twig' %}
+
+{% block body %}
+    <div class="card">
+        <br>
+        <br>
+        <br><br><br><br>
+        <br>
+        <br>
+        <div class="card-header">
+            <h1>Create a new Test</h1>
+        </div>
+        <div class="card-body">
+            {{ form_start(form, { 'attr': {'class': 'form', 'novalidate': 'novalidate'} }) }}
+            {% for questionForm in form.questionAnswers %}
+                <div class="question">
+                    {{ form_label(questionForm.question) }}
+                    {{ form_widget(questionForm.question, { 'attr': {'class': 'form-control', 'required': 'required'} }) }}
+                    {{ form_errors(questionForm.question) }}
+
+                    {{ form_label(questionForm.answer) }}
+                    {{ form_widget(questionForm.answer, { 'attr': {'class': 'form-control', 'required': 'required'} }) }}
+                    {{ form_errors(questionForm.answer) }}
+
+
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="btn btn-primary" id="submit-button" disabled>Update Test</button>
+            <a href="{{ path('offres_list')  }}" class="btn btn-light">Cancel</a>
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+    <style>
+        .form-control:invalid {
+            border-bottom: 2px solid red;
+        }
+
+        .form-control:focus:invalid {
+            box-shadow: none;
+        }
+
+        #submit-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.querySelector('.form');
+            const submitButton = document.querySelector('#submit-button');
+
+            form.addEventListener('input', function() {
+                if (form.checkValidity()) {
+                    submitButton.disabled = false;
+                } else {
+                    submitButton.disabled = true;
+                }
+            });
+        });
+    </script>
+{% endblock %}

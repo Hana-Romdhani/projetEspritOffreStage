@@ -1,0 +1,70 @@
+
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>Freelanci
+		</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+		<link rel="stylesheet" href="{{ asset('frontOffice/font/icomoon/style.css') }}">
+
+		<link rel="stylesheet" href="{{ asset('frontOffice/css/bootstrap.min.css') }}">
+		<link rel="stylesheet" href="{{ asset('frontOffice/css/jquery-ui.css') }}">
+		<link rel="stylesheet" href="{{ asset('frontOffice/css/owl.carousel.min.css') }}">
+		<link rel="stylesheet" href="{{ asset('frontOffice/css/owl.theme.default.min.css') }}">
+		<link rel="stylesheet" href="{{ asset('frontOffice/css/owl.theme.default.min.css') }}">
+
+		<link rel="stylesheet" href="{{ asset('frontOffice/css/jquery.fancybox.min.css') }}">
+
+		<link rel="stylesheet" href="{{ asset('frontOffice/css/bootstrap-datepicker.css') }}">
+
+		<link rel="stylesheet" href="{{ asset('frontOffice/fonts/flaticon/font/flaticon.css') }}">
+
+		<link rel="stylesheet" href="{{ asset('frontOffice/css/aos.css') }}">
+
+		<link rel="stylesheet" href="{{ asset('frontOffice/css/style.css') }}">
+{% block title %}Réinitialiser le mot de passe.
+{% endblock %}
+	</head>
+	<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+
+	
+
+		{% block body %}
+
+
+			<div class="container">
+				<div class="row align-items-center justify-content-center">
+
+					<div class="card">
+						<div class="card-body">
+
+
+							<h2>Oublier Mot de passe</h2>
+
+
+							{{ form_start(requestForm) }}
+							{{ form_row(requestForm.email) }}
+							<div>
+								<small>
+
+									Veuillez entrer votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe.
+								</small>
+							</div>
+
+							<button class="btn btn-primary w-100">Envoyer un e-mail de réinitialisation de mot de passe.</button>
+							{{ form_end(requestForm) }}
+						</div>
+
+
+					</div>
+				</div>
+
+			</div>
+		</body>
+	</html>
+</div>{% endblock %}</body></html>

@@ -1,0 +1,181 @@
+{% extends 'AdminPage.html.twig' %}
+
+{% block title %}Utilisateur index
+{% endblock %}
+
+
+{% block body %}
+
+	<div class="main-panel">
+		<div class="content-wrapper">
+			{% for flashMessage in app.session.flashbag.get('success') %}
+				<div class="alert alert-success">{{ flashMessage }}</div>
+			{% endfor %}
+			<div class="page-header">
+				<h3 class="page-title">
+					Liste des utilisateurs
+				</h3>
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item">
+							<a href="{{ path('app_gerer_utilisateur_Liste')}}">Gestion des Comptes</a>
+						</li>
+					</ol>
+				</nav>
+			</div>
+
+			<div class="row">
+				<div class="col-sm">
+					<div class="card">
+						<div class="card-body">
+
+							<a href="{{ path('app_gerer_utilisateur_Liste_supprimer')}}" class="badge badge-info">
+								<i class="mdi mdi-delete-sweep">liste_désactiver</i>
+							</a>
+
+
+							<a href="{{ path('utilisateur_tripardate')}}" class="badge badge-info">
+								<i class="mdi mdi-redo">date</i>
+							</a>
+
+
+							<form id="search-form">
+								<div class="form-group">
+									<input type="text" class="form-control" id="searchTerm" name="searchTerm">
+								</div>
+								<button type="submit" class="btn btn-primary">Rechercher</button>
+							</form>
+
+							<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+							<div class="table-responsive">
+								<table class="table" id="utilisateur-table">
+									
+									<thead>
+										<tr>
+
+											<th>
+												Images
+											</th>
+
+											<th>Nom</th>
+											<th>Prénom</th>
+											<th>Email</th>
+											<th>Genre</th>
+											<th>Date de création
+											</th>
+											<th>Actions</th>
+
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											{% for utilisateur in utilisateurs %}
+												{% if 'Admin' not in utilisateur.roles %}
+													<tr>
+														<td class="py-1">
+															<img src="{{ asset('uploads/utilisateur/' ~ utilisateur.urlImage) }}" alt="User Image" style="width: 50px; height: 50px;"/>
+														</td>
+														<td>{{ utilisateur.nom }}</td>
+														<td>{{ utilisateur.prenom }}</td>
+														<td>{{ utilisateur.email }}</td>
+
+														<td>{{ utilisateur.gender }}</td>
+														<td>{{ utilisateur.date | date('Y-m-d H:i:s') }}</td>
+														{% if utilisateur.isdelete %}
+															<td>
+																<a href="{{ path('app_gerer_utilisateur_detaille', {'idUtilisateur': utilisateur.idUtilisateur}) }}" class="badge badge-info">Detaille</a>
+																<a href="{{ path('app_gerer_utilisateur_modifier', {'idUtilisateur': utilisateur.idUtilisateur}) }}" class="badge badge-success">Modifier</a>
+																<a href="{{ path('app_gerer_utilisateur_modif_sup', {'idUtilisateur': utilisateur.idUtilisateur}) }}" class="badge badge-warning" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet élément ?')">Désactiver</a>
+
+															</td>
+
+														{% else %}
+															<td>
+																<a href="{{ path('app_gerer_utilisateur_Liste_recup', {'idUtilisateur': utilisateur.idUtilisateur}) }}" class="badge badge-success">Restaurer</a>
+																<a href="{{ path('app_gerer_utilisateur_sup', {'idUtilisateur': utilisateur.idUtilisateur}) }}" class="badge badge-warning" onclick="return confirm('Êtes-vous sûr de vouloir supprimer définitivement cet élément ?')">Supprimer</a>
+
+																<a href="{{ path('app_gerer_utilisateur_Liste') }}">
+																	<i class="mdi mdi-keyboard-return">
+																		retourner</i>
+																</a>
+																<a href="{{ path('utilisateur_tripardatesup')}}" class="badge badge-info">
+																	<i class="mdi mdi-redo">tri date suprimer</i>
+																</a>
+
+															</td>
+
+														{% endif %}
+													{% endif %}
+
+												{% else %}
+													<tr>
+														<td colspan="20">no records found</td>
+													</tr>
+												{% endfor %}
+											</tr>
+
+										</tr>
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+
+
+		{# <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> #}
+
+		<script>
+			setTimeout(function () {
+var successMessages = document.querySelectorAll('.alert-success');
+for (var i = 0; i < successMessages.length; i++) {
+successMessages[i].classList.add('hide');
+}
+}, 5000);
+		</script>
+
+
+		<style>
+			.hide {
+				display: none;
+			}
+		</style>
+
+
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script>
+			$(document).ready(function () {
+$('#search-form').submit(function (event) {
+event.preventDefault();
+var searchTerm = $('#searchTerm').val();
+$.ajax({
+url: '{{ path('app_gerer_utilisateur_chercherajax') }}?searchTerm=' + searchTerm,
+type: 'GET',
+success: function (data) {
+var utilisateurs = data.results;
+var html = '';
+for (var i = 0; i < utilisateurs.length; i++) {
+html += '<tr>';
+html += '<td>' + " " + '</td>';
+html += '<td>' + utilisateurs[i].nom + '</td>';
+html += '<td>' + utilisateurs[i].prenom + '</td>';
+html += '<td>' + utilisateurs[i].email + '</td>';
+html += '<td>' + utilisateurs[i].gender + '</td>';
+html += '</tr>';
+}
+$('#utilisateur-table tbody').html(html);
+}
+});
+});
+});
+		</script>
+
+
+	{% endblock %}

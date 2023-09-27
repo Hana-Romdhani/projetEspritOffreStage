@@ -1,0 +1,93 @@
+{% extends 'frontUsers.html.twig' %}
+
+
+
+ {# {% block stylesheets %} #}
+{# <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> #}
+
+    {# <link rel="stylesheet" href="{{ asset('css/offre.css') }}"> #}
+{# {% endblock %}   #}
+      {% block create %}
+          <a class="nav-link btn btn-success create-new-button" id="createbuttonDropdown"  aria-expanded="false" href="/offre/create">+ Create Offre</a>
+      {% endblock %}
+{% block body %}
+
+<main id="main" data-aos="fade-in">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+      <div class="container">
+        <h2>Tout les Offres</h2>
+        <p>Est dolorum ut non facere possimus quibusdam eligendi voluptatem. Quia id aut similique quia voluptas sit quaerat debitis. Rerum omnis ipsam aperiam consequatur laboriosam nemo harum praesentium. </p>
+      </div>
+    </div><!-- End Breadcrumbs -->
+   
+    <!-- ======= Courses Section ======= -->
+    <section id="courses" class="courses">
+      <div class="container" data-aos="fade-up">
+{% if 	 app.user.role == 'etudiant' %}
+        <div class="row" data-aos="zoom-in" data-aos-delay="100">
+         {% for offre in offres %}
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+            <div class="course-item">
+              <div class="course-content">
+              <img src="{{ asset('uploads/utilisateur/' ~ offre.UserIDOFFRE.urlImage) }}" class="img-fluid" alt="...">
+                {# <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h6>Nom de sociéte : {{ offre.nomOffre }}</h6><br>
+                  <h6>Date de cloture de l'offre : {{ offre.nomOffre }}</h6><br>
+                  <h6>Date de publication  de l'offre : {{ offre.nomOffre }}</h6><br>
+                  <h6>Description  de la societe : {{ offre.description }}</h6>
+
+                </div> #}
+
+<div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title">Titre de poste  : {{ offre.nomOffre }}</h5>
+        <p class="card-text">Description de la société :</p>
+        <p class="card-text">{{ offre.description }}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Date de clôture de l'offre : {{ offre.dateCloture|date('d/m/Y') }}</li>
+        <li class="list-group-item">Date de publication de l'offre : {{ offre.datePublication|date('d/m/Y') }}</li>
+    </ul>
+</div>
+
+
+
+                <div class="trainer d-flex justify-content-between align-items-center">
+                  <div class="trainer-profile d-flex align-items-center">
+                       
+                                <button class="btn btn-danger">Postuler</button>
+
+ 
+                  </div>
+                 
+                </div>
+              </div>
+            </div>
+          </div> <!-- End Course Item-->
+
+         {% endfor %}
+
+
+        </div>
+{% else  %} 
+                <a href="{{ path('offre_create') }}" class="btn btn-primary">Ajouter un Offre </a>
+
+			{% endif %}
+      </div>
+    </section><!-- End Courses Section -->
+
+  </main><!-- End #main -->
+
+
+
+
+
+
+
+    
+		
+      
+{% endblock %}

@@ -1,0 +1,276 @@
+{% extends 'Adminpage.html.twig' %}
+
+{% block title %}Parametrer votre compte
+{% endblock %}
+
+{% block body %}
+	<div class="main-panel">
+		<div class="content-wrapper">
+			{% for flashMessage in app.session.flashbag.get('success') %}
+				<div class="alert alert-success">{{ flashMessage }}</div>
+			{% endfor %}
+			<div class="page-header">
+				<h3 class="page-title">
+					Retourner
+				</h3>
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item">
+							<a href="{{ path('app_gerer_utilisateur_Liste')}}">Gestion des Comptes</a>
+						</li>
+					</ol>
+				</nav>
+			</div>
+
+			<div class="row">
+				<div class="col-sm">
+					<div class="card">
+						<div class="card-body">
+
+							<main id="main" class="main">
+
+								<div class="pagetitle">
+									<h1>Profile</h1>
+
+								</div>
+								<!-- End Page Title -->
+
+								<section class="section profile">
+									<div class="row">
+										<div class="col-xl-4">
+
+											<div class="card">
+												<div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+
+
+													<img src="{{ asset('uploads/utilisateur/' ~ app.user.urlImage) }}" alt="Profile" class="rounded-circle" width="100" height="100">
+													<h2>{{app.user.nom}}</h2>
+													{% if app.user.roles is defined and app.user.roles|length %}
+														<h3>
+															{{ app.user.roles|join(', ') }}</h3>
+													{% endif %}
+
+
+													<div class="social-links mt-2">
+														<a href="#" class="twitter">
+															<i class="bi bi-twitter"></i>
+														</a>
+														<a href="#" class="facebook">
+															<i class="bi bi-facebook"></i>
+														</a>
+														<a href="#" class="instagram">
+															<i class="bi bi-instagram"></i>
+														</a>
+														<a href="#" class="linkedin">
+															<i class="bi bi-linkedin"></i>
+														</a>
+													</div>
+												</div>
+											</div>
+
+										</div>
+
+										<div class="col-xl-8">
+
+											<div class="card">
+												<div
+													class="card-body pt-3">
+													<!-- Bordered Tabs -->
+													<ul class="nav nav-tabs nav-tabs-bordered">
+
+														<li class="nav-item">
+															<button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Aperçu</button>
+														</li>
+
+														<li class="nav-item">
+															<a class="nav-link" href="{{app.user.idUtilisateur}}" data-bs-toggle="tab" data-bs-target="#edit-profile" id="#edit-profile-link">Edit Profile</a>
+														</li>
+
+
+													</ul>
+													<div class="tab-content pt-2">
+														{% for flashMessage in app.session.flashbag.get('success') %}
+															<div class="alert alert-success">{{ flashMessage }}</div>
+														{% endfor %}
+														<div class="tab-pane fade show active profile-overview" id="profile-overview">
+															<h5 class="card-title">A propos</h5>
+															<p class="small fst-italic">En tant qu'entreprise de freelance, 
+																																																																																																																																								                                            notre objectif est de continuer à offrir des services de haute qualité à nos
+																																																																																																																																								                                             clients tout en renforçant notre réputation dans l'industrie. 
+																																																																																																																																								                                             Nous avons l'intention de continuer à développer nos compétences en matière
+																																																																																																																																								                                              de technologies de pointe et de rester à jour avec les dernières tendances 
+																																																																																																																																								                                              et les meilleures pratiques.
+																{#Nous prévoyons également d'élargir notre portefeuille 
+																																																																																																																																								                                              de clients et de partenaires,
+																																																																																																																																								                                             en travaillant avec des entreprises dans différents secteurs 
+																																																																																																																																								                                             et de différentes tailles. Nous souhaitons également accroître 
+																																																																																																																																								                                             notre présence sur le marché en mettant en place des stratégies 
+																																																																																																																																								                                             marketing efficaces et en renforçant notre présence sur les réseaux sociaux.
+																																																																																																																																								                                              Enfin, nous sommes déterminés à offrir un environnement de travail agréable et 
+																																																																																																																																								                                              stimulant pour nos employés, en favorisant la collaboration, la créativité et l'innovation.</p> #}
+
+																<h5 class="card-title">Détails du profil</h5>
+
+																<div class="row">
+																	<div class="col-lg-3 col-md-4 label ">Nom</div>
+																	<div class="col-lg-9 col-md-8">{{app.user.nom}}</div>
+																</div>
+
+																<div class="row">
+																	<div class="col-lg-3 col-md-4 label">prenom</div>
+																	<div class="col-lg-9 col-md-8">{{app.user.prenom}}</div>
+																</div>
+
+																<div class="row">
+																	<div class="col-lg-3 col-md-4 label">role</div>
+
+
+																	{% if app.user.roles is defined and app.user.roles|length %}
+																		<div class="col-lg-9 col-md-8">
+																			{{ app.user.roles|join(', ') }}</div>
+																	{% endif %}
+
+																</div>
+
+																<div class="row">
+																	<div class="col-lg-3 col-md-4 label">Numéro Téléphone
+																	</div>
+																	<div class="col-lg-9 col-md-8">{{app.user.numeroTel}}</div>
+																</div>
+
+																<div class="row">
+																	<div class="col-lg-3 col-md-4 label">Adresse</div>
+																	<div class="col-lg-9 col-md-8">{{app.user.address}}</div>
+																</div>
+																<div class="row">
+																	<div class="col-lg-3 col-md-4 label">Email</div>
+																	<div class="col-lg-9 col-md-8">{{app.user.email}}</div>
+																</div>
+																<div class="row">
+
+																	<div class="col-lg-3 col-md-4 label">Status</div>
+
+																	<div class="col-lg-9 col-md-8">
+																		<div class="count-indicator">
+																			<span class="count bg-success">connecter</span>
+																		</div>
+																	</div>
+
+																</div>
+															</p>
+														</p>
+													</div>
+													{# <div class="row mb-3">
+																																											<label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
+																																											<div class="col-md-8 col-lg-9">
+																																												<img src="assets/img/profile-img.jpg" alt="Profile">
+																																												<div class="pt-2">
+																																													<a href="#" class="btn btn-primary btn-sm" title="Upload new profile image">
+																																														<i class="bi bi-upload"></i>
+																																													</a>
+																																													<a href="#" class="btn btn-danger btn-sm" title="Remove my profile image">
+																																														<i class="bi bi-trash"></i>
+																																													</a>
+																																												</div>
+																																											</div>
+																																										</div> #}
+													<div
+														id="edit-profile" class="tab-pane fade edit-profile pt-3">
+
+														<!-- Profile Edit Form -->
+														<form method="post" action="{{ path('app_gerer_utilisateur_edit') }}">
+
+
+															<div class="row mb-3">
+																<label for="nom" class="col-md-4 col-lg-3 col-form-label">nom</label>
+																<div class="col-md-8 col-lg-9">
+																	<input name="nom" type="text" class="form-control" id="nom" value="{{app.user.nom}}">
+																</div>
+															</div>
+
+															<div class="row mb-3">
+																<label for="prenom" class="col-md-4 col-lg-3 col-form-label">prenom</label>
+																<div class="col-md-8 col-lg-9">
+																	<input name="prenom" type="text" class="form-control" id="prenom" value="{{app.user.prenom}}">
+																</div>
+															</div>
+
+															<div class="row mb-3">
+																<label for="numero" class="col-md-4 col-lg-3 col-form-label">Numéro Telephone</label>
+																<div class="col-md-8 col-lg-9">
+																	<input name="numero" type="number" class="form-control" id="numero" value="{{app.user.numeroTel}}">
+																</div>
+															</div>
+
+															<div class="row mb-3">
+																<label for="address" class="col-md-4 col-lg-3 col-form-label">Adresse</label>
+																<div class="col-md-8 col-lg-9">
+																	<input name="address" type="text" class="form-control" id="address" value="{{app.user.address}}">
+																</div>
+															</div>
+
+															<div class="row mb-3">
+																<label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
+																<div class="col-md-8 col-lg-9">
+																	<input name="Email" type="text" class="form-control" id="Email" value="{{app.user.email}}">
+																</div>
+															</div>
+
+															<div class="text-center">
+																<button type="submit" class="btn btn-primary">Save Changes</button>
+															</div>
+														</form>
+														<!-- End Profile Edit Form -->
+
+													</div>
+
+
+												</div>
+												<!-- End Bordered Tabs -->
+
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</section>
+
+						</main>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+</div>
+
+
+<!-- End #main -->
+<script src="{{ asset('assetss/js/main.js') }}"></script>
+<!-- Script pour activer les onglets -->
+<script>
+	const navLinks = document.querySelectorAll('.nav-link')
+navLinks.forEach(link => {
+link.addEventListener('click', (e) => {
+e.preventDefault()
+const target = link.getAttribute('data-bs-target')
+const tab = document.querySelector(target)
+const tabs = document.querySelectorAll('.tab-pane')
+tabs.forEach(tab => {
+tab.classList.remove('active', 'show')
+})
+tab.classList.add('active', 'show')
+})
+})
+</script>
+
+<script>
+	setTimeout(function () {
+var successMessages = document.querySelectorAll('.alert-success');
+for (var i = 0; i < successMessages.length; i++) {
+successMessages[i].classList.add('hide');
+}
+}, 5000);
+</script>{% endblock %}

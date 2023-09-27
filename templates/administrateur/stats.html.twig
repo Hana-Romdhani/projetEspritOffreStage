@@ -1,0 +1,79 @@
+{% extends 'Adminpage.html.twig' %}
+{% block title %}Statistique
+{% endblock %}
+
+{% block body %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="main-panel">
+  <div class="content-wrapper">
+    <h1>Description de nos Service</h1>
+    <p class="small fst-italic">
+      En tant qu'entreprise de freelance, notre objectif est de continuer à offrir des services de haute qualité à nos clients tout en renforçant notre réputation dans l'industrie. Nous avons l'intention de continuer à développer nos compétences en matière de technologies de pointe et de rester à jour avec les dernières tendances et les meilleures pratiques. Nous souhaitons accroître notre présence sur le marché en travaillant avec des entreprises dans différents secteurs et de différentes tailles. 
+    </p>
+    <div class="row">
+      <div class="col-lg-6 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Nombre d'inscrire par jour</h4>
+    <p class="small fst-italic">
+            Ce graphique affiche le nombre de tentatives de connexion utilisateur par jour .
+           </p>
+           
+           
+            <canvas id="myChart" style="height: 291px; display: block; width: 583px;" width="728"height="363"class="chartjs-render-monitor"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const loginCountByDay = JSON.parse('{{ loginCountByDay|raw }}');
+const labels = loginCountByDay.map(login => login.loginDay);
+const data = loginCountByDay.map(login => login.loginCount);
+
+const ctx = document.getElementById('myChart').getContext('2d');
+const loginCountChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: labels,
+    datasets: [{
+      label: 'Nombre de connexions par jour',
+      data: data,
+      
+ 
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+      borderColor: 'rgba(255,99,132,1)',
+      borderWidth: 1
+    }]
+  },
+  options: {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }]
+    }
+  }
+});
+</script> 
+{# Ce code est un script JavaScript utilisant la bibliothèque Chart.js pour créer un graphique à barres représentant le nombre de connexions utilisateur par jour.
+
+Tout d'abord, la variable loginCountByDay est initialisée en utilisant JSON.parse(). Cela permet de convertir une chaîne JSON en un objet JavaScript. Dans ce cas, la chaîne JSON est fournie par la variable loginCountByDay|raw qui est probablement une variable Twig renvoyée depuis un contrôleur Symfony.
+
+Ensuite, les tableaux labels et data sont initialisés à partir de loginCountByDay. La variable labels contient une liste de noms de jours, extraits de loginCountByDay, tandis que data contient une liste de nombres représentant le nombre de connexions pour chaque jour.
+
+Ensuite, un élément HTML <canvas> est récupéré en utilisant l'ID myChart, et un contexte 2D est obtenu pour cet élément. Chart.js est utilisé pour créer une nouvelle instance de graphique à barres, en utilisant le contexte 2D récupéré.
+
+Les options de graphique sont spécifiées en utilisant la propriété options de l'objet de graphique. Dans ce cas, l'axe y est configuré pour commencer à zéro.
+
+Enfin, un ensemble de données est défini à l'aide de la propriété datasets de l'objet de graphique, qui contient un objet avec des propriétés pour étiqueter la série de données, les données elles-mêmes, et les couleurs pour les barres de la série.
+
+En résumé, ce script récupère les données d'un contrôleur Symfony en utilisant Twig, les convertit en un objet JavaScript, puis utilise Chart.js pour créer un graphique à barres représentant le nombre de connexions utilisateur par jour.
+ #}
+
+{% endblock %}

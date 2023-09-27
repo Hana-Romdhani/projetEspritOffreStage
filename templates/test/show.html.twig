@@ -1,0 +1,24 @@
+{% extends 'Adminpage.html.twig' %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-header">
+            <h1>Test</h1>
+        </div>
+        <div class="card-body">
+            <h3>Test questions:</h3>
+            <ul>
+                {% for questionAnswer in test.questionAnswers %}
+                    <li>Question : {{ questionAnswer.question }} </li>
+                    <p>Answer :  {{ questionAnswer.answer }}</p>
+
+                {% endfor %}
+            </ul>
+            <a href="{{ path('offre_test_edit', {'id': offre.id,'testId':test.id}) }}" class="btn btn-success" >update Test</a>
+            <a href="{{ path('offre_test_remove', {'id': offre.id,'testId':test.id}) }}" class="btn btn-danger" >remove Test</a>
+            <a href="{{ path('offres_list')  }}" class="btn btn-light">Return</a>
+
+        </div>
+
+    </div>
+{% endblock %}

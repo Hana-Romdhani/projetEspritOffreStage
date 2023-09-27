@@ -1,0 +1,45 @@
+<div class="modal fade" id="selectRoleModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Choisir un rôle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/inscription">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="role" id="role1" value="societe">
+                        <label class="form-check-label" for="role1">Sociéte</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="role" id="role2" value="etudiant">
+                        <label class="form-check-label" for="role2">Etudiant</label>
+                    </div>
+                    <button type="submit" class="btn btn-danger">Continuer</button>
+                 </form>
+            </div>
+       </div>
+     </div>
+</div>
+<script>
+
+// AJAX request to select user role
+$.ajax({
+    url: '/role',
+    type: 'POST',
+    dataType: 'json',
+    success: function(data) {
+        // Render the registration form inside a dialog
+        var dialog = $('<div>').html(data.content).dialog({
+            autoOpen: true,
+            modal: true,
+            title: 'Registration Form'
+        });
+        // Redirect to the registration page after the dialog is closed
+        dialog.on('dialogclose', function() {
+            window.location.href = '/user/inscription';
+        });
+    }
+});
+
+</script>

@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		
+		<title>
+			{% block title %}Sinscrire
+			{% endblock %}
+		</title>
+		<link rel="shortcut icon" href="img/imglogo.ico"/>
+		<!-- plugins:css -->
+		<link rel="stylesheet" href=" {{ asset('back/vendors/mdi/css/materialdesignicons.min.css') }}">
+		<link rel="stylesheet" href="  {{ asset('back/vendors/css/vendor.bundle.base.css') }}">
+		<link
+		rel="stylesheet" href="{{ asset('back/css/style.css') }}">
+	<!-- End layout styles -->
+
+
+	</head>
+	
+	<body>
+	{% for flashMessage in app.session.flashbag.get('success') %}
+				<div class="alert alert-success">{{ flashMessage }}</div>
+			{% endfor %}
+		<div class="container-scroller">
+			<div class="container-fluid page-body-wrapper full-page-wrapper">
+				<div class="row w-100 m-0">
+					<div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
+						<div class="card col-lg-4 mx-auto">
+							<div class="card-body px-5 py-5">
+								<h3 class="card-title text-left mb-3">Register</h3>
+
+								<div class="form-group">
+
+									{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+
+
+									{{ form_label(form.nom,"Nom ") }}
+									{{ form_widget(form.nom,{'attr':{'class':'form-control'}}) }}
+									{% if form_errors(form.nom)  %}
+
+										<div class="alert alert-danger" style=" color : red">
+											{{ form_errors(form.nom)  }}
+										</div>
+									{% endif %}
+
+
+									{# {% if form.getErrors('nom') %}
+																																														<div class="alert alert-danger" style=" color : red">
+																																															{{ form.getErrors('nom')|join }}
+																																														</div>
+																																													{% endif %} #}
+								{# {% if form.nom.errors %}
+																																																																																							<div class="alert alert-danger" style="color:red;">
+																																																																																								{{ form.nom.errors|join }}
+																																																																																							</div>
+																																																																																						{% endif %} #}
+
+
+									{# {% if errors|length > 0 and app.request.get('nom') is not defined %}
+																																																																<div class="alert alert-danger"> <ul>
+																																																																	{% for error in errors %}
+																																																																		<li>{{ error.message }}</li>
+																																																																	{% endfor %}
+																																																																</ul>
+																																																															</div>
+																																																														{% endif %} #}
+									{# {% if form_errors(form) and app.request.get('nom') is not defined %}
+																																																								<div class="alert alert-danger"> <ul>
+																																																									{% for error in form_errors(form) %}
+																																																										<li>{{ error.message }}</li>
+																																																									{% endfor %}
+																																																								</ul>
+																																																							</div>
+																																																						{% endif %} #}
+
+
+								</div>
+								{% set role = app.request.get('role') %}
+								{% if role == 'etudiant' %}
+									<div class="form-group">
+
+										{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+										{{ form_label(form.prenom,"Prénom") }}
+										{{ form_widget(form.prenom,{'attr':{'class':'form-control '}}) }}
+										{% if form_errors(form.prenom) %}
+
+											<div class="alert alert-danger" style=" color : red">
+												{{ form_errors(form.prenom) }}
+											</div>
+										{% endif %}
+
+
+									</div>
+
+								{% else  %}
+									{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+									{{ form_label(form.prenom, 'Prénom', {'label_attr': {'class': 'sr-only'}}) }}
+
+									{{ form_widget(form.prenom,{'attr':{'class':'form-control ','hidden': 'hidden'}}) }}
+									{% if form_errors(form.prenom) %}
+
+										<div class="alert alert-danger" style=" color : red">
+											{{ form_errors(form.prenom) }}
+										</div>
+									{% endif %}
+
+								{% endif %}
+								<div class="form-group">
+									{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+									{{ form_label(form.email,"Email") }}
+									{{ form_widget(form.email,{'attr':{'class':'form-control'}}) }}
+									{% if form_errors(form.email) %}
+
+										<div class="alert alert-danger" style=" color : red">
+											{{ form_errors(form.email) }}
+										</div>
+									{% endif %}
+
+								</div>
+								<div class="form-group">
+
+									{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+									{{ form_label(form.password, 'Password') }}
+
+									{{ form_widget(form.password,{'attr':{'class':'form-control '}}) }}
+									{% if form_errors(form.password) %}
+
+										<div class="alert alert-danger" style=" color : red">
+											{{ form_errors(form.password) }}
+										</div>
+									{% endif %}
+
+								</div>
+								<div class="form-group">
+									{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+									{{ form_label(form.numeroTel,"Numéro de Telephone ") }}
+									{{ form_widget(form.numeroTel,{'attr':{'class':'form-control'}}) }}
+									{% if form_errors(form.numeroTel) %}
+
+										<div class="alert alert-danger" style=" color : red">
+											{{ form_errors(form.numeroTel) }}
+										</div>
+									{% endif %}
+
+
+								</div>
+								<div class="form-group">
+
+									{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+									{{ form_label(form.address,"Adresse") }}
+									{{ form_widget(form.address,{'attr':{'class':'form-control'}}) }}
+									{% if form_errors(form.address) %}
+
+										<div class="alert alert-danger" style=" color : red">
+											{{ form_errors(form.address) }}
+										</div>
+									{% endif %}
+
+								</div>
+								<div class="form-group">
+									{# {% set role =  %} #}
+									{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+									{{ form_widget(form.roles,{'attr':{'class':'form-control','hidden': 'hidden'}}) }}
+                                        
+								{# {% if form_errors(form.roles) , %}
+																	
+																											<div class="alert alert-danger" style=" color : red">
+																												{{ form_errors(form.roles) }}
+																											</div>
+																										{% endif %} #}
+
+
+									{# {% set selectedRole = app.request.get('role') %}
+																											{{ form_start(form) }}
+																											{% for choice in form.roles %}
+																												<div class="form-check">
+																													{{ form_widget(choice, {'attr': {'class': 'form-check-input'}}) }}
+																													{{ form_label(choice, choice.label, {'attr': {'class': 'form-check-label'}}) }}
+																												</div>
+																											{% endfor %} #}
+									{# {% set defaultRole = app.request.attributes.get('_route_params').get('defaultRole') %}
+																		{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+																		{% for choice in form.role %}
+																				<div class="form-check"> 
+																				{{ form_widget(choice, {'attr': {'class': 'form-check-input'}}) }}
+																				{{ form_label(choice, choice.label, {'attr': {'class': 'form-check-label'}}) }}
+																			   </div>
+																		{% endfor %} #}
+
+								</div>
+								 {% set role = app.request.get('role') %}
+								{% if role == 'etudiant' %}
+									<div class="form-group">
+										{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+										{{ form_label(form.refSpecialite,"Spécialite") }}
+										{{ form_widget(form.refSpecialite,{'attr':{'class':'form-control'}}) }}
+										{% if form_errors(form.refSpecialite) %}
+
+											<div class="alert alert-danger" style=" color : red">
+												{{ form_errors(form.refSpecialite) }}
+
+											</div>
+										{% endif %}
+
+									</div>
+								{% else  %} 
+									<div class="form-group">
+										{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+										{{ form_label(form.refSpecialite,"Spécialite", {'label_attr': {'class': 'sr-only'}}) }}
+										{{ form_widget(form.refSpecialite,{'attr':{'class':'form-control','hidden': 'hidden'}}) }}
+										{% if form_errors(form.refSpecialite) %}
+
+											<div class="alert alert-danger" style=" color : red">
+												{{ form_errors(form.refSpecialite) }}
+
+											</div>
+										{% endif %}
+									</div>
+
+								{% endif %}
+
+								{% set role = app.request.get('role') %}
+								{% if role == 'etudiant' %}
+
+									<div class="form-group">
+										{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+										{{ form_label(form.gender,"Genre") }}
+										{{ form_widget(form.gender,{'attr':{'class':'form-control'}}) }}
+										{% if form_errors(form.gender) %}
+
+											<div class="alert alert-danger" style=" color : red">
+												{{ form_errors(form.gender) }}
+
+											</div>
+										{% endif %}
+
+									</div>
+								{% else  %}
+
+									<div class="form-group">
+										{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+										{{ form_label(form.gender,"Genre", {'label_attr': {'class': 'sr-only'}}) }}
+										{{ form_widget(form.gender,{'attr':{'class':'form-control','hidden': 'hidden'}}) }}
+										{% if form_errors(form.gender) %}
+
+											<div class="alert alert-danger" style=" color : red">
+												{{ form_errors(form.gender) }}
+
+											</div>
+										{% endif %}
+
+									</div>
+
+								{% endif %}
+								<div class="form-group">
+										{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+							         	{{ form_label(form.urlImage,"Image") }}
+
+										{{ form_widget(form.urlImage,{'attr':{'class':'form-control'}}) }}
+										{% if form_errors(form.urlImage) %}
+
+											<div class="alert alert-danger" style=" color : red">
+												{{ form_errors(form.urlImage) }}
+
+											</div>
+										{% endif %}
+									</div>
+								{% set role = app.request.get('role') %}
+								{% if role == 'etudiant' %}
+									<div class="form-group">
+										{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+										{{ form_label(form.domaineDeCompetence," Domaine de compétence ") }}
+										{{ form_widget(form.domaineDeCompetence,{'attr':{'class':'form-control'}}) }}
+										{% if form_errors(form.domaineDeCompetence) %}
+
+											<div class="alert alert-danger" style=" color : red">
+												{{ form_errors(form.domaineDeCompetence) }}
+
+											</div>
+										{% endif %}
+									</div>
+								{% else  %}
+
+									<div class="form-group">
+										{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+										{{ form_label(form.domaineDeCompetence," Domaine de compétence ", {'label_attr': {'class': 'sr-only'}}) }}
+										{{ form_widget(form.domaineDeCompetence,{'attr':{'class':'form-control','hidden': 'hidden'}}) }}
+										{% if form_errors(form.domaineDeCompetence) %}
+
+											<div class="alert alert-danger" style=" color : red">
+												{{ form_errors(form.domaineDeCompetence) }}
+
+											</div>
+										{% endif %}
+									</div>
+
+								{% endif %}
+								{% set role = app.request.get('role') %}
+								
+								{% set role = app.request.get('role') %}
+								{% if role == 'etudiant' %}
+									<div class="form-group">
+										{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+							         	{{ form_label(form.portfolio,"importer vos CV (pdf) ") }}
+
+										{{ form_widget(form.portfolio,{'attr':{'class':'form-control'}}) }}
+										{% if form_errors(form.portfolio) %}
+
+											<div class="alert alert-danger" style=" color : red">
+												{{ form_errors(form.portfolio) }}
+
+											</div>
+										{% endif %}
+									</div>
+								{% else  %}
+
+									<div class="form-group">
+										{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+							         	{{ form_label(form.portfolio,"Importer vos CV", {'label_attr': {'class': 'sr-only'}}) }}
+
+										{{ form_widget(form.portfolio,{'attr':{'class':'form-control','hidden': 'hidden'}}) }}
+										{% if form_errors(form.portfolio) %}
+
+											<div class="alert alert-danger" style=" color : red">
+												{{ form_errors(form.portfolio) }}
+
+											</div>
+										{% endif %}
+									</div>
+
+								{% endif %}
+								{% set role = app.request.get('role') %}
+								{% if role == 'societe' %}
+									<div class="form-group">
+										{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+										{{ form_label(form.siteweb,"Web site ") }}
+										{{ form_widget(form.siteweb,{'attr':{'class':'form-control'}}) }}
+										{% if form_errors(form.siteweb) %}
+
+											<div class="alert alert-danger" style=" color : red">
+												{{ form_errors(form.siteweb) }}
+
+											</div>
+										{% endif %}
+									</div>
+
+
+									<div class="form-group">
+										{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+										{{ form_label(form.description,"Décrire votre sociéter") }}
+										{{ form_widget(form.description,{'attr':{'class':'form-control'}}) }}
+										{% if form_errors(form.description) %}
+
+											<div class="alert alert-danger" style=" color : red">
+												{{ form_errors(form.description) }}
+
+											</div>
+										{% endif %}
+									</div>
+									<div class="form-group">
+										{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+										{{ form_label(form.formeJuridique," Taille de vos societe ") }}
+										{{ form_widget(form.formeJuridique,{'attr':{'class':'form-control'}}) }}
+										{% if form_errors(form.formeJuridique) %}
+
+											<div class="alert alert-danger" style=" color : red">
+												{{ form_errors(form.formeJuridique) }}
+
+											</div>
+										{% endif %}
+									</div>
+								{% else  %}
+									<div class="form-group">
+										{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+										{{ form_label(form.siteweb,"Web site ", {'label_attr': {'class': 'sr-only'}}) }}
+										{{ form_widget(form.siteweb,{'attr':{'class':'form-control','hidden': 'hidden'}}) }}
+										{% if form_errors(form.siteweb) %}
+
+											<div class="alert alert-danger" style=" color : red">
+												{{ form_errors(form.siteweb) }}
+
+											</div>
+										{% endif %}
+									</div>
+
+
+									<div class="form-group">
+										{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+										{{ form_label(form.description,"Décrire votre sociéter", {'label_attr': {'class': 'sr-only'}}) }}
+										{{ form_widget(form.description,{'attr':{'class':'form-control','hidden': 'hidden'}}) }}
+										{% if form_errors(form.description) %}
+
+											<div class="alert alert-danger" style=" color : red">
+												{{ form_errors(form.description) }}
+
+											</div>
+										{% endif %}
+									</div>
+									<div class="form-group">
+										{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+										{{ form_label(form.formeJuridique," Taille de vos societe ", {'label_attr': {'class': 'sr-only'}}) }}
+										{{ form_widget(form.formeJuridique,{'attr':{'class':'form-control','hidden': 'hidden'}}) }}
+										{% if form_errors(form.formeJuridique) %}
+
+											<div class="alert alert-danger" style=" color : red">
+												{{ form_errors(form.formeJuridique) }}
+
+											</div>
+										{% endif %}
+									</div>
+								{% endif %}
+								<div class="form-group">
+
+									{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+									{{ form_label(form.agreeTerms,"I agree") }}
+									{{ form_widget(form.agreeTerms,{'attr':{'class':'form-control '}}) }}
+									{% if form_errors(form.agreeTerms) %}
+
+										<div class="alert alert-danger" style=" color : red">
+											{{ form_errors(form.agreeTerms) }}
+										</div>
+									{% endif %}
+
+
+								</div>
+								<div class="form-group">
+
+									{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+									{{ form_label(form.isdelete,"", {'label_attr': {'class': 'sr-only'}}) }}
+									{{ form_widget(form.isdelete,{'attr':{'class':'form-control ','hidden': 'hidden', 'data': true}}) }}
+									{% if form_errors(form.isdelete) %}
+
+										<div class="alert alert-danger" style=" color : red">
+											{{ form_errors(form.isdelete) }}
+										</div>
+									{% endif %}
+
+
+								</div>
+								<div class="form-group">
+
+									{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+									{{ form_label(form.date,"date", {'label_attr': {'class': 'sr-only'}}) }}
+									{{ form_widget(form.date,{'attr':{'class':'form-control ','hidden': 'hidden',}}) }}
+									{% if form_errors(form.date) %}
+
+										<div class="alert alert-danger" style=" color : red">
+											{{ form_errors(form.date) }}
+										</div>
+									{% endif %}
+
+
+								</div>
+
+								<button class="btn">
+									{{ form_widget(form.save)}}
+									{{ form_widget(form._token) }}
+
+									{{ form_end(form, {render_rest: false}) }}
+
+								</button>
+
+								<a href="{{ path('app_login') }}" class="btn btn-dark">Cancel</a>
+
+
+							</div>
+						</div>
+					</div>
+					<!-- content-wrapper ends -->
+				</div>
+				<!-- row ends -->
+			</div>
+			<!-- page-body-wrapper ends -->
+		</div>
+
+
+		{# // Set the selected option based on the value of the "role" parameter #}
+		{# var selectedRole = "{{ selectedRole }}";
+				if (selectedRole) {
+				    var option = document.querySelector('input[name="{{ form.roles.vars.full_name }}"][value="' + selectedRole + '"]');
+				    if (option) {
+				        option.checked = true;
+				    }
+				} #}
+		{# <script>
+			// Set the selected option based on the value of the "defaultRole" parameter
+var defaultRole = "{{ defaultRole }}";
+if (defaultRole) {
+var option = document.querySelector('input[name="  {{ form.role.vars.full_name }}"][value="' + defaultRole + '"]');
+if (option) {
+option.checked = true;
+}
+}
+		</script> #}
+
+		<!-- container-scroller -->
+		<!-- plugins:js -->
+		<script src="{{ asset('back/vendors/js/vendor.bundle.base.js') }}"></script>
+		<script src="{{ asset('back/js/off-canvas.js') }}"></script>
+		<script src="{{ asset('back/js/hoverable-collapse.js') }}"></script>
+		<script src="{{ asset('back/js/misc.js') }}"></script>
+		<script src="{{ asset('back/js/settings.js') }}"></script>
+		<script src="{{ asset('back/js/todolist.js') }}"></script>
+		<!-- endinject -->
+	</body>
+</html></body></html>

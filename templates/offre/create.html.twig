@@ -1,0 +1,65 @@
+
+{# {% extends 'Adminpage.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('back/css/css.css') }}">
+{% endblock %}
+      {% block create %}
+          <a class="nav-link btn btn-success create-new-button" id="createbuttonDropdown"  aria-expanded="false" href="/offre/create">+ Create Offre</a>
+      {% endblock %} #}
+
+{% if 	 app.user.role == 'Admin' %}
+    {% include 'Adminpage.html.twig' %}
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('back/css/css.css') }}">
+    {% endblock %}
+    
+    {% block create %}
+        <a class="nav-link btn btn-success create-new-button" id="createbuttonDropdown"  aria-expanded="false" href="/offre/create">+ Create Offre</a>
+    {% endblock %}
+{% else %}
+    {% include 'frontUsers.html.twig' %}
+
+    
+{% endif %}
+{% block body %}
+    <div  style="max-width: 800px;" id="add-offer-form" class="offre-form">
+        <div class="card-header">
+           
+            <h1 class="text-center mb-0">Add Offre</h1>
+        </div>
+        <div class="card-body">
+            {{ form_start(form, { 'attr': {'class': 'form', 'novalidate': 'novalidate'} }) }}
+            <div class="form-group">
+                {{ form_label(form.nomOffre) }}
+                {{ form_widget(form.nomOffre, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.nomOffre) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.description) }}
+                {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.description) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.datePublication) }}
+                {{ form_widget(form.datePublication, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.datePublication) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.dateCloture) }}
+                {{ form_widget(form.dateCloture, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.dateCloture) }}
+            </div>      
+ <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+            {{ form_end(form) }} 
+           
+        </div>
+    </div>
+
+{% endblock %}

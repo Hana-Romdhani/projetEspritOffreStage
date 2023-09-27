@@ -1,0 +1,65 @@
+{% extends 'Adminpage.html.twig' %}
+
+{% block title %}Edit Utilisateur
+{% endblock %}
+
+{% block body %}
+	<div class="main-panel">
+		<div class="content-wrapper">
+			<div class="page-header">
+				<h1 class="page-title">
+					Ajouter Spécialite
+
+				</h1>
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item">
+							<a href="#">Gestion des Spécialite</a>
+						</li>
+					</ol>
+				</nav>
+			</div>
+			<div id="popup-content">
+				<div class="large-group">
+
+					<div class="small-group">
+
+						{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+
+
+						{{ form_label(form.domaine,"Spécialite ") }}
+						{{ form_widget(form.domaine,{'attr':{'class':'form-control'}}) }}
+						{% if form_errors(form.domaine) %}
+
+							<div class="alert alert-danger" style=" color : red">
+								{{ form_errors(form.domaine) }}
+							</div>
+
+
+						{% endif %}
+
+
+					</div>
+
+
+					<button class="btn">
+						{{ form_widget(form.save)}}
+						{{ form_widget(form._token) }}
+
+						{{ form_end(form, {render_rest: false}) }}
+
+					</button>
+
+
+				</div>
+
+
+				<a href="{{ path('app_specialite') }}">
+					<i class="mdi mdi-keyboard-return"></i>
+				</a>
+
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
